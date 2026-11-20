@@ -1,13 +1,33 @@
+# OS & IDE
 .DS_Store
-.idea
+.idea/
+.vscode/
+
+# Environment & Virtualenvs
+.env
+.venv/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OCaml / Hardcaml / Dune
+_build/
+*.install
+.merlin
+
+# Simulation Waveforms & Build Artifacts
 *.vcd
 *.fst
 *.fst.hier
-runs
-tt_submission
+runs/
+tt_submission/
 src/user_config.json
 src/config_merged.json
-test/sim_build
+test/sim_build/
 test/__pycache__/
 test/results.xml
 test/gate_level_netlist.v

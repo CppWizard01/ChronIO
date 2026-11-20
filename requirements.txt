@@ -1,0 +1,7 @@
+# ChronIO Python Toolchain & Verification Dependencies
+-r test/requirements.txt
+pyyaml>=6.0.2
+python-dotenv>=1.0.1
+rich>=13.9.0
+cocotbext-uart>=0.1.4
+cocotbext-spi>=0.4.0
