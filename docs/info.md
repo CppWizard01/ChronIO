@@ -1,20 +1,21 @@
 <!---
-
-This file is used to generate your project datasheet. Please fill in the information below and delete any unused
-sections.
-
-You can also include images in this folder and reference them in the markdown. Each image must be less than
-512 kb in size, and the combined size of all images must be less than 1 MB.
+This file is used to generate your project datasheet.
 -->
 
 ## How it works
 
-Explain how your project works
+**ChronIO** is a 4-lane barrel time-division-multiplexed (TDM) software-defined protocol emulator ASIC designed for the Jane Street × Tiny Tapeout competition on the IHP 130nm SG13CMOS5L process (`8x4` tile allocation).
+
+Key architectural highlights:
+- **Shared 4 KB (`1024x32`) IHP Hard SRAM Macro (`RM_IHPSG13_1P_1024x32_c2_bm_bist`)** storing up to 1,024 32-bit fixed-width instructions shared across 4 concurrent protocol lanes.
+- **4-Stage Hazard-Free Barrel Pipeline** executing 4 independent hardware threads at 15 MIPS per lane (60 MHz core clock) with provable cross-lane timing non-interference.
+- **Cycle-Exact Timed I/O Ports (`.AT`)** with hardware `TCMP += TPER` auto-stepping and edge timestamp capture (`TSTAMP`) providing 16.67 ns edge placement resolution.
+- **Programmable Bitstream Conditioning Pipeline** supporting serial bit-streaming (`.SER`), NRZI, Manchester encoding/decoding, bit stuffing, edge-locking DPLL clock recovery, and a universal 32-bit reflected LFSR CRC engine.
 
 ## How to test
 
-Explain how to use your project
+In the Phase 1.3 SRAM baseline verification wrapper, commands are issued over `ui_in[7:6]` with data/address bytes on `uio_in[7:0]` and readback on `uo_out[7:0]`. Run the cocotb test suite in `test/` for both RTL and Gate-Level simulation (`GATES=yes`).
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+Controlled by the onboard RP2350 microcontroller over a 4-wire Host SPI interface (`ui_in[2:0]` and `uo_out[0]`). External protocol targets connect via the remaining digital I/O pins and Pmod headers.
